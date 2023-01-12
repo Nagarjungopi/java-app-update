@@ -9,7 +9,6 @@ pipeline {
     }
 	
  stages {
-	 stages {
            stage ('sonarqube analysis') {
              steps {
                 script {
