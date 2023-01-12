@@ -14,7 +14,11 @@ pipeline {
                 sh 'mvn package'             
           }
         }
-	
+	stage('SonarQube Analysis') {
+	    steps {
+	       sh '${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-github'
+	       }
+	     }
          stage('Login') {
 
 			steps {
