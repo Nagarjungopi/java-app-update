@@ -9,16 +9,12 @@ pipeline {
     }
 	
  stages {
-           stage ('sonarqube analysis') {
-             steps {
-                script {
-            withSonarQubeEnv('sonarqube') {
-            sh "mvn sonar:sonar"
-
+    stage ('Build Artifact') {
+         steps {
+             sh 'mvn clean package -DskipTests=true'
+             }
         }
-       } 
-    }
-}
+
 	 stage('Execute Maven') {
            steps {
              
