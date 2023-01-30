@@ -51,7 +51,7 @@ pipeline {
         }
     stage ('Email') {
         steps {
-                   emailext attachLog: true, body: "status:${currentBuild.currentResult},"  "job-name:${env.JOB_NAME}\\nMore Info can be found here: ${env.BUILD_URL}," subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}", to: 'nagarjun.j@optisolbusiness.com'
+                emailext attachLog: true, body: 'Status: ${currentBuild.result}: ${BUILD_URL}', subject: 'Build Notification: ${JOB_NAME}-Build# ${BUILD_NUMBER} ${currentBuild.result}', to: 'nagarjun.j@optisolbusiness.com'
              }
            }
         }
