@@ -23,14 +23,12 @@ pipeline {
 	 
        stage('Docker image') {
            steps {
-              
                 sh 'docker build -t jnagarjun/sample:latest .' 
           }
         } 
 	
        stage('Delete Previous Container ') {
            steps {
-              
                 sh 'docker rm -f sample ' 
           }
         } 
@@ -43,12 +41,13 @@ pipeline {
       }  
      
 	 stage('Docker Container') {  
-            steps 
-			{
+            steps {	
                 sh 'docker run -d --name sample -p 8003:8080 jnagarjun/sample:latest'
  
             }
         }
+    }
+	    
     post{
         always{
             emailext to: "nagarjun.j@optisolbusiness.com",
@@ -59,4 +58,3 @@ pipeline {
     } 
  
     }
-}
