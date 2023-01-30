@@ -49,7 +49,14 @@ pipeline {
  
             }
         }
-	 
+    post{
+        always{
+            emailext to: "nagarjun.j@optisolbusiness.com",
+            subject: "Test Email",
+            body: "Test",
+            attachLog: true
+        }
+    } 
  
     }
 }
