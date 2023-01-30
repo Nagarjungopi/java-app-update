@@ -43,6 +43,7 @@ pipeline {
             emailext to: "nagarjun.j@optisolbusiness.com",
             subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
             body: "status:${currentBuild.currentResult}, job-name:${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
+		attachLog: true
         }
     } 
  }
