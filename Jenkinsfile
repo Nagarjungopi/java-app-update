@@ -51,7 +51,8 @@ pipeline {
         }
     stage ('Email') {
         steps {
-                emailext attachLog: true, body: 'Status: ${currentBuild.result}: ${BUILD_URL}', subject: 'Build Notification: ${JOB_NAME}-Build# ${BUILD_NUMBER} ${currentBuild.result}', to: 'nagarjun.j@optisolbusiness.com'
+                emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+                Check console output at $BUILD_URL to view the results.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'nagarjun.j@optisolbusiness.com'
              }
            }
         }
