@@ -27,7 +27,11 @@ pipeline {
   		 sh  'docker push jnagarjun/sample:latest'		         		       			
        }
       }  
-     
+     stage('Delete Previous Container ') {
+           steps {
+                sh 'docker rm -f sample ' 
+          }
+        }
 	 stage('Docker Container') {  
             steps {	
                 sh 'docker run -d --name sample -p 8003:8080 jnagarjun/sample:latest'
