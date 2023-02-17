@@ -37,6 +37,13 @@ pipeline {
                 sh 'docker run -d --name sample -p 8003:8080 jnagarjun/sample:latest'
             }
 	 }
+        stage ("push to s3"){
+            steps{
+                sh "cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >>  ${JOB_NAME}-${BUILD_NUMBER}.log"
+
+                sh  "aws s3 cp  ${JOB_NAME}-${BUILD_NUMBER}.log s3://jenkins-logfile/${JOB_NAME}-${BUILD_NUMBER}.log.log"
+            }
+        }
     }    
 post{
         always{
