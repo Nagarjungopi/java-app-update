@@ -21,11 +21,7 @@ pipeline {
                 sh 'docker build -t jnagarjun/sample:latest .' 
           }
         } 
-       stage('Delete Previous Container ') {
-           steps {
-                sh 'docker rm -f sample ' 
-          }
-        }
+      
        stage('Push image') {
 	       steps {
   		 sh  'docker push jnagarjun/sample:latest'		         		       			
