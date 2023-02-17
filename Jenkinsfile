@@ -44,13 +44,12 @@ pipeline {
                 sh  "aws s3 cp  ${JOB_NAME}-${BUILD_NUMBER}.log s3://jenkins-logfile/${JOB_NAME}-${BUILD_NUMBER}.log.log"
             }
         }
-    }    
-post{
+    }
+ post{
         always{
-            emailext to: "nagarjun.j@optisolbusiness.com",
-            subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
-            body: "status:${currentBuild.currentResult}: Job-name: ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
-            attachLog: true
-        }
+            sh "cat ${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log >>  ${JOB_NAME}-${BUILD_NUMBER}.log"
+
+            sh  "aws s3 cp  ${JOB_NAME}-${BUILD_NUMBER}.log s3://jenkins-logfile/${JOB_NAME}-${BUILD_NUMBER}.log.log"
+                    }
     }
 }
